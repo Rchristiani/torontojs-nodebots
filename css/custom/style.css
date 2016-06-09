@@ -1,0 +1,30 @@
+/*body {
+	background: linear-gradient( rgba(243, 132, 103, 0.44), rgba(252, 218, 162, 0.58) ),  url(../../imgs/gplaypattern_@2X.png);
+}*/
+.reveal section img {
+	border: none;
+	background: none;
+	box-shadow: none;
+}
+.reveal .progress span {
+	background: #D12026;
+}
+.reveal .controls .navigate-right, 
+.reveal .controls .navigate-right.enabled {
+	border-left-color: #D12026;
+}
+.reveal .controls .navigate-left, 
+.reveal .controls .navigate-left.enabled {
+	border-right-color: #D12026;
+}
+.reveal .controls .navigate-up, 
+.reveal .controls .navigate-up.enabled {
+	border-bottom-color: #D12026;
+}
+.reveal .controls .navigate-down, 
+.reveal .controls .navigate-down.enabled {
+	border-top-color: #D12026;
+}
+.bg-color {
+	color: white;
+}

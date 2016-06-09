@@ -1,0 +1,194 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>TorontoJS NodeBots Workshop</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/white.css">
+
+		<link rel="stylesheet" href="css/custom/style.css">
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/obsidian.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section data-background="#d12026" data-background-transition="zoom" clas="bg-color">
+					<h1>HI!</h1>
+				</section>
+			<!-- Example of nested vertical slides -->
+				<section data-background="#d12026" data-background-transition="zoom" class="bg-color">
+					<h2>About Me</h2>
+					<p class="fragment">Lead Instructor and Developer at HackerYou</p>
+					<p class="fragment">@Rchristiani on Twitter</p>
+					<p class="fragment">ryanchristiani.com</p>
+					<p class="fragment">letslearnes6.com</p>
+				</section>
+
+				<section data-background="#d12026" data-background-transition="zoom">
+					<img src="images/RyanVideo_ES6_Title_02.jpg">
+				</section>
+
+				<section>
+					<h2>Introduction to NodeBots</h2>
+				</section>
+				<section>
+					<h3>Overview</h3>
+					<ul>
+						<li>Johnny Five Basics</li>
+						<li>Look at Socket IO</li>
+						<li>Looks at some start files</li>
+						<li>Play around</li>
+					</ul>
+				</section>
+				<section>
+					<h2>NodeBots with Johnny Five</h2>
+				</section>
+				<section>
+					<p>Johnny Five is a great library for interacting with a board! And it has great documentation, <a href="http://johnny-five.io/api/">http://johnny-five.io/api/</a></p>
+				</section>
+				<section>
+					<h3>The Setup</h3>
+					<p>Before you can get started you have to install a Firmata to the board, this is a protocol used to communicate with the Micro controller. This is already done for you!</p>
+					<p>But if you do that at home, you need to install the StandardFirmata</p>
+				</section>
+				<section>
+					<h3>First Program</h3>
+					<p>Let's connect the boards and write out first program! Open up the simple folder from the startFiles in your text editor.</p> 
+					<p>Navigate to the folder in your terminal and run <code>npm install</code></p>
+				</section>
+				<section>
+<pre><code class="javascript">
+const j5 = require('johnny-five');
+const board = new j5.Board();
+
+</code></pre>
+				</section>
+
+				<section>
+<pre><code class="javascript">
+const j5 = require('johnny-five');
+const board = new j5.Board();
+
+board.on('ready',function() {
+	console.log('Beep Boop');
+});
+
+</code></pre>
+				</section>
+
+				<section>
+					<p>Now run <code>node robot.js</code>, after a little bit we should see <code>Beep Boop</code></p>
+				</section>
+
+				<section>
+					<h3>Our first motor</h3>
+					<p>The motors are already set up for you, so there is no wiring required here. They are connected to a driver, this driver allows us to control the server motors(set up to be continuous) forward and backwards.</p>
+				</section>
+
+				<section>
+<pre><code class="javascript">
+const motorOne = new j5.Motor({
+	pins: {
+		pwm: 3,
+		dir: 2
+	},
+	invertPWM: true
+});
+</code></pre>
+				</section>
+
+				<section>
+					<p>Here we can created a new motor and configured it, we need to tell Johnny Five the pins being used, one is the <code>pwm</code> pin(controls speed) and one is the <code>dir</code> pin(controls direction).</p>
+				</section>
+
+				<section>
+					<h2>The REPL</h2>
+				</section>
+
+				<section>
+					<p>Setting up a motor is good and all, but how do we test if it works? We can inject our component into it!</p>
+<pre><code class="javascript">
+this.repl.inject({
+	motorOne
+});
+
+</code></pre>
+				</section>
+
+				<section>
+					<p>Running <code>node robot.js</code>, will start it back up again, but this time we can interact with the motor!</p>
+<pre><code class="javascript">
+>> motorOne.start(); //Starts the motor
+>> motorOne.stop();
+
+</code></pre>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						###Helpful Motor Methods
+						 Method Name | Options | Description 
+						------------ | ------- | -----------
+						 .start(speed) | 0 - 255 |  Start the motor!
+						 .stop() | | Stop the motor!
+						 .forward(speed) | 0 - 255 | Make the motor go forward
+						 .reverse(speed) | 0 - 255 | Make the motor reverse
+					</script>
+				</section>
+
+				<section>
+					<h2>Play around!</h2>
+				</section>
+				<section>
+					<h3>Connecting the second motor</h3>
+<pre><code class="javascript">
+const motorTwo = new j5.Motor({
+	pins: {
+		pwm: 5,
+		dir: 4
+	},
+	invertPWM: true
+});
+
+this.repl.inject({
+	motorOne,
+	motorTwo
+});
+</code></pre>
+				</section>
+			</div>
+		</div>
+
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				history: true,
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>
