@@ -31,7 +31,7 @@
 			<!-- Example of nested vertical slides -->
 				<section data-background="#d12026" data-background-transition="zoom" class="bg-color">
 					<h2>About Me</h2>
-					<p class="fragment">Lead Instructor and Developer at HackerYou</p>
+					<p class="fragment">Lead Instructor & Developer at HackerYou</p>
 					<p class="fragment">@Rchristiani on Twitter</p>
 					<p class="fragment">ryanchristiani.com</p>
 					<p class="fragment">letslearnes6.com</p>
@@ -83,7 +83,7 @@ const j5 = require('johnny-five');
 const board = new j5.Board();
 
 board.on('ready',function() {
-	console.log('Beep Boop');
+  console.log('Beep Boop');
 });
 
 </code></pre>
@@ -101,11 +101,11 @@ board.on('ready',function() {
 				<section>
 <pre><code class="javascript">
 const motorOne = new j5.Motor({
-	pins: {
-		pwm: 3,
-		dir: 2
-	},
-	invertPWM: true
+  pins: {
+    pwm: 3,
+    dir: 2
+  },
+  invertPWM: true
 });
 </code></pre>
 				</section>
@@ -119,10 +119,10 @@ const motorOne = new j5.Motor({
 				</section>
 
 				<section>
-					<p>Setting up a motor is good and all, but how do we test if it works? We can inject our component into it!</p>
+					<p>Setting up a motor is good and all, but how do we test if it works? We can inject our component into a repl!</p>
 <pre><code class="javascript">
 this.repl.inject({
-	motorOne
+  motorOne
 });
 
 </code></pre>
@@ -150,24 +150,75 @@ this.repl.inject({
 				</section>
 
 				<section>
-					<h2>Play around!</h2>
-				</section>
-				<section>
 					<h3>Connecting the second motor</h3>
 <pre><code class="javascript">
 const motorTwo = new j5.Motor({
-	pins: {
-		pwm: 5,
-		dir: 4
-	},
-	invertPWM: true
+  pins: {
+    pwm: 5,
+    dir: 4
+  },
+  invertPWM: true
 });
 
 this.repl.inject({
-	motorOne,
-	motorTwo
+  motorOne,
+  motorTwo
 });
 </code></pre>
+				</section>
+
+				<section>
+					<h3>Board Methods</h3>
+
+<pre><code class="javascript">
+motorOne.forward(255);
+boardTwo.wait(2000,() => {
+  motor.stop();
+});
+
+</code></pre>
+
+
+				</section>
+
+				<section>
+					<h3>Motor Events</h3>
+					<p>The motors also emit events. These events follow the names of the methods from above!</p>
+
+					<p><code>start</code>, <code>stop</code>, <code>forward</code>, <code>reverse</code>. To use these we can follow this pattern.</p>
+<pre><code class="javascript">
+motor.on('start',() => {
+  board.wait(2000,() => {
+    motor.stop();
+  });
+});	
+	
+</code></pre>
+				</section>
+
+				<section>
+					<h2>Play around! </h2>
+				</section>
+
+				<section>
+					<h2>Socket.io</h2>
+					<p>Real time communication.</p>
+				</section>
+
+				<section>
+					<p>Since we are writing JS on the board, we can use all the node packages we might be familiar with. In this case <a href="http://socket.io/">socket.io</a> is going to be one to look at!</p>
+				</section>
+
+				<section>
+					<p>With socket.io we can create a real time connection between out bot a server and however many clients we want.</p>
+				</section>
+
+				<section>
+					<p>Provided for you are a few starterFiles for the a socket.io, let's review them now!</p>
+				</section>
+
+				<section data-background="#d12026" data-background-transition="zoom" class="bg-color">
+					<h2>HAVE FUN!</h2>
 				</section>
 			</div>
 		</div>

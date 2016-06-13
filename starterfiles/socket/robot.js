@@ -8,7 +8,7 @@ const http = require('http');
 
 socketIO.listen('4556');
 
-const socket = io.connect('http://robotfriends.club:4557');
+const socket = io.connect('http://localhost:4557');
 socket.on('connect', function() {
 	board.on('ready', () => {
 

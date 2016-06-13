@@ -132,7 +132,7 @@ Socket.io is a web sockets library that allows us to create real time data flow!
 I have also supplied a `socketserver.js` file and an `index.html` file for us to use.
 
     'use strict'
-
+    
     const socket = require('socket.io');
     const express = require('express');
     const http = require('http');
